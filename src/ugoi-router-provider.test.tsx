@@ -6,6 +6,6 @@ import { UgoiRouterProvider } from "./ugoi-router-provider";
 describe("Router tests", () => {
   test("should render the correct element for the root path", () => {
     render(<UgoiRouterProvider />);
-    expect(screen.getByTestId("home")).toBeTruthy();
+    expect(screen.getByTestId("home-page")).toBeTruthy();
   });
 });

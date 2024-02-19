@@ -1,14 +1,17 @@
 import React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import ResponsiveAppBar from "./ResponsiveAppBar/ResponsiveAppBar";
+import ResponsiveAppBar from "./components/ResponsiveAppBar/ResponsiveAppBar";
 import routes from "./routesConfig";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Portfolio from "./components/Portfolio/Portfolio";
 
 // Defione navbar component with outlet
 const Root: React.FC = () => {
   return (
     <>
       <ResponsiveAppBar data-testid="responsive-app-bar" routes={routes} />
-      <div id="detail">
+      <div id="detail" style={{ width: "100%" }}>
         <Outlet />
       </div>
     </>
@@ -22,20 +25,20 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "/",
-        element: <div data-testid="home">Home</div>,
+        path: "",
+        element: <Home />,
       },
       {
         path: "about",
-        element: <div data-testid="about">About</div>,
+        element: <About />,
       },
       {
         path: "chat",
-        element: <div data-testid="chat">Chat</div>,
+        element: <div data-testid="chat-page">Chat</div>,
       },
       {
         path: "portfolio",
-        element: <div data-testid="portfolio">Portfolio</div>,
+        element: <Portfolio />,
       },
     ],
   },

@@ -1,25 +1,25 @@
 /// <reference types="cypress" />
 
-describe('Routing e2e tests', () => {
-  it('should navigate to the home page', () => {
-    cy.visit('/')
+describe("Routing e2e tests", () => {
+  it("should navigate to the home page", () => {
+    cy.visit("/");
     // Assert something unique about the home page
     // Check if data-testid="home" is present
-    cy.get('[data-testid="home"]').should('exist')
+    cy.get('[data-testid="home-page"]').should("exist");
     // cy.contains('Home') // Example: Check if 'Home' text is present
-  })
+  });
 
-  it('should navigate to the portfolio page', () => {
-    cy.visit('/portfolio')
+  it("should navigate to the portfolio page", () => {
+    cy.visit("/portfolio");
     // Assert something unique about the portfolio page
-    cy.contains('Portfolio') // Example: Check if 'Portfolio' text is present
-  })
+    cy.get('[data-testid="portfolio-page"]').should("exist");
+  });
 
-  it('should navigate to the chat page', () => {
-    cy.visit('/chat')
+  it("should navigate to the chat page", () => {
+    cy.visit("/chat");
     // Assert something unique about the chat page
-    cy.contains('Chat') // Example: Check if 'Chat' text is present
-  })
+    cy.get('[data-testid="chat-page"]').should("exist");
+  });
 
   // Add more routes as needed
-})
+});
