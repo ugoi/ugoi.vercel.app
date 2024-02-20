@@ -5,13 +5,14 @@ import routes from "./routesConfig";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Portfolio from "./components/Portfolio/Portfolio";
+import Chat from "./components/Chat/Chat";
 
 // Defione navbar component with outlet
 const Root: React.FC = () => {
   return (
     <>
       <ResponsiveAppBar data-testid="responsive-app-bar" routes={routes} />
-      <div id="detail" style={{ width: "100%" }}>
+      <div id="detail" style={{ width: "100%", height: "100%" }}>
         <Outlet />
       </div>
     </>
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "chat",
-        element: <div data-testid="chat-page">Chat</div>,
+        element: <Chat/>,
       },
       {
         path: "portfolio",
