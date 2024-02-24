@@ -3,6 +3,7 @@ import {
   CometChatUsersWithMessages,
   MessagesConfiguration,
   UsersConfiguration,
+  WithMessagesStyle,
 } from "@cometchat/chat-uikit-react"; //import the component in your App.js file
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -27,10 +28,12 @@ const UgoiChat: React.FC = () => {
     },
   } as MessagesConfiguration;
 
+  const cwmStyle: WithMessagesStyle = {};
+
   return (
-    <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-      <LogoutComponent />
+    <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", top: 0, bottom: 0, left: 0, right: 0, position: "absolute" }}>
       <CometChatUsersWithMessages
+        usersWithMessagesStyle={cwmStyle}
         usersConfiguration={usersConfiguration}
         isMobileView={isMobileView}
         messagesConfiguration={messagesConfiguration}

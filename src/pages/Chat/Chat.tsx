@@ -3,6 +3,7 @@ import UgoiChat from "../../components/UgoiChat/UgoiChat";
 import { useAuth } from "../../contexts/AuthContext";
 import "ldrs/dotSpinner";
 import { g } from "vitest/dist/suite-ghspeorC.js";
+import LogoutComponent from "../../components/LogoutComponent/LogoutComponent";
 
 const Chat: React.FC = () => {
   const { isAuth, isLoaded } = useAuth();
@@ -24,8 +25,21 @@ const Chat: React.FC = () => {
     );
   if (isAuth == false) return <Navigate to="/login" />;
   return (
-    <div style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-      <UgoiChat />
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Container for the logout button and the chat; it uses flexbox to position children */}
+      <div style={{ flexGrow: 0 }}>
+        <LogoutComponent />
+      </div>
+      <div
+        style={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          position: "relative",
+        }}
+      >
+        <UgoiChat />
+      </div>
     </div>
   );
 };
