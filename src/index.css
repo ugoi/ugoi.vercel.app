@@ -78,5 +78,7 @@ button:focus-visible {
 #detail {
   flex-grow: 1; /* This will make the div take up the remaining space */
   width: 100%; /* Full width */
+  display: flex;
+  flex-direction: column;
   /* No specific height needed; it will automatically fill the available space */
 }

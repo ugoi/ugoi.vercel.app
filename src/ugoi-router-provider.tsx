@@ -2,18 +2,25 @@ import React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import ResponsiveAppBar from "./components/ResponsiveAppBar/ResponsiveAppBar";
 import routes from "./routesConfig";
-import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Portfolio from "./components/Portfolio/Portfolio";
-import Chat from "./components/Chat/Chat";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Portfolio from "./pages/Portfolio/Portfolio";
+import Chat from "./pages/Chat/Chat";
+import { AuthProvider } from "./contexts/AuthContext";
+import Login from "./pages/Login/Login";
 
 // Defione navbar component with outlet
 const Root: React.FC = () => {
   return (
     <>
       <ResponsiveAppBar data-testid="responsive-app-bar" routes={routes} />
-      <div id="detail" style={{ width: "100%", height: "100%" }}>
-        <Outlet />
+      <div
+        id="detail"
+        style={{ flexGrow: 1, display: "flex", flexDirection: "column"}}
+      >
+        <AuthProvider>
+          <Outlet />
+        </AuthProvider>
       </div>
     </>
   );
@@ -35,11 +42,15 @@ const router = createBrowserRouter([
       },
       {
         path: "chat",
-        element: <Chat/>,
+        element: <Chat />,
       },
       {
         path: "portfolio",
         element: <Portfolio />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
     ],
   },
