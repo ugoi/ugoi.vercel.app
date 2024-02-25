@@ -8,6 +8,7 @@ function Login() {
   if (!isLoaded)
     return (
       <div
+        data-testid="login-page"
         aria-live="polite"
         style={{
           alignItems: "center",

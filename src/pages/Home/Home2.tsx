@@ -12,60 +12,39 @@ const Home2: React.FC = () => {
           <Typography
             gutterBottom
             sx={{
-              mx: { xs: 3, md: 0 },
               typography: { xs: "h4", md: "h3" },
             }}
           >
             Let me introduce myself
           </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{ textAlign: { xs: "center", md: "left" } }}
-            paragraph
-          >
+          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
             Hello there! I'm a student from 42 Heilbronn with a flair for
             bringing ideas into the digital world. For me, it all starts with
             understanding your vision. By gathering your requirements, I ensure
             that each project is a custom-fit for its intended users.
           </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{ textAlign: { xs: "center", md: "left" } }}
-            paragraph
-          >
+          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
             Crafting intuitive designs comes next, where your concept begins to
             take shape in visual and interactive prototypes. This allows us to
             iterate and perfect the project's design early in the process.
           </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{ textAlign: { xs: "center", md: "left" } }}
-            paragraph
-          >
+          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
             When it comes to bringing these designs to life, it's a symphony of
             technology. Mobile apps and websites are just the start. Underneath
             the surface, a robust database is key—it's like the foundation of a
             building that keeps the data organized and accessible.
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ textAlign: { xs: "center", md: "left" } }}
-            paragraph
-          >
+          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
             But that's not all. A seamless front-end for users, a reliable
             back-end for data processing, APIs for communication between
             different software parts, and thorough testing to ensure everything
             works as it should, all come together to create a harmonious and
             efficient app experience.
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{ textAlign: { xs: "center", md: "left" } }}
-            paragraph
-          >
+          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
             My approach is to meticulously integrate these technologies,
             ensuring each piece works in concert to serve the final product.
             Let's connect and weave your vision into a digital reality that's as

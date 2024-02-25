@@ -16,9 +16,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { FirebaseService2 } from "../services/FirebaseService2";
-import { FirebaseService2Mock } from "../services/FirebaseService2Mock";
 import { CometChatUIKit } from "@cometchat/chat-uikit-react";
 import { UIKitSettings } from "./cometchat-config";
+import { set } from "firebase/database";
 
 interface AuthContextType {
   authToken: string | null;
@@ -81,6 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsAuth(false);
         setAuthToken(null); // Clear authToken if necessary
         cookies.remove("auth-token");
+        setCometChatUser(null);
       }
       setIsLoaded(true); // indicate loading is done regardless of the auth state
     });
@@ -95,7 +96,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         console.log("Initializing FirebaseService2");
         console.log("FirebaseSettings");
-        await FirebaseService2Mock.init();
+        await FirebaseService2.init();
         console.log("FirebaseService2 initialized successfully");
         // You can now use FirebaseService2 instance in this component
       } catch (error) {
@@ -113,9 +114,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Check for logged in user
         const user = await CometChatUIKit.getLoggedinUser();
         if (!user) {
-          const authToken = await FirebaseService2Mock.getAuthToken();
+          const authToken = await FirebaseService2.getAuthToken();
           // Login user if no user is logged in
-          const loggedInUser = await CometChatUIKit.login(authToken);
+          const loggedInUser = await CometChatUIKit.loginWithAuthToken(authToken);
 
           console.log("Login Successful:", { user: loggedInUser });
           setCometChatUser(loggedInUser);
@@ -151,8 +152,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const user = userCredential.user;
       await updateProfile(user, { displayName });
 
-      await FirebaseService2Mock.completeUserProfile();
-      const token = await FirebaseService2Mock.getAuthToken();
+      await FirebaseService2.completeUserProfile();
+      const token = await FirebaseService2.getAuthToken();
       setAuthToken(token);
       cookies.set("auth-token", user.refreshToken);
       setIsAuth(true);
@@ -178,7 +179,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signInWithGoogle = async () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
-      await FirebaseService2Mock.completeUserProfile();
+      await FirebaseService2.completeUserProfile();
       cookies.set("auth-token", userCredential.user.refreshToken);
       setIsAuth(true);
     } catch (error) {

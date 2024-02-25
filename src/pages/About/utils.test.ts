@@ -7,6 +7,7 @@ describe("scrollToSection", () => {
 
   beforeEach(() => {
     window = originalWindow;
+    window.scrollTo = vi.fn() as any;
   });
 
   it("scrolls to the correct section", async () => {

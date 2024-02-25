@@ -16,10 +16,10 @@ const Root: React.FC = () => {
       <ResponsiveAppBar data-testid="responsive-app-bar" routes={routes} />
       <div
         id="detail"
-        style={{ flexGrow: 1, display: "flex", flexDirection: "column"}}
+        style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
       >
         <AuthProvider>
-          <Outlet />
+        <Outlet />
         </AuthProvider>
       </div>
     </>

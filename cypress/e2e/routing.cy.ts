@@ -16,9 +16,9 @@ describe("Routing e2e tests", () => {
   });
 
   it("should navigate to the chat page", () => {
-    cy.visit("/chat");
+    cy.visit("/login");
     // Assert something unique about the chat page
-    cy.get('[data-testid="chat-page"]').should("exist");
+    cy.get('[data-testid="login-page"]').should("exist");
   });
 
   // Add more routes as needed

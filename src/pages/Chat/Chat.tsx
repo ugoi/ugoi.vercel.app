@@ -2,7 +2,6 @@ import { Navigate } from "react-router-dom";
 import UgoiChat from "../../components/UgoiChat/UgoiChat";
 import { useAuth } from "../../contexts/AuthContext";
 import "ldrs/dotSpinner";
-import { g } from "vitest/dist/suite-ghspeorC.js";
 import LogoutComponent from "../../components/LogoutComponent/LogoutComponent";
 
 const Chat: React.FC = () => {
