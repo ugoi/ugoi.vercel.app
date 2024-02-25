@@ -10,6 +10,7 @@ declare global {
 }
 
 class FirebaseService2 {
+  // @ts-ignore
   private static settings: any; // Adjust the type as needed
   private static readonly cloudFunctionUrl: string =
     import.meta.env.VITE_APP_API_COMPLETE_USER_PROFILE || "";

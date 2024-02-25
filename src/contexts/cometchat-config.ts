@@ -1,4 +1,3 @@
-import { CometChat } from "@cometchat/chat-sdk-javascript";
 import { UIKitSettingsBuilder } from "@cometchat/chat-uikit-react";
 
 type CometChatConstants = {

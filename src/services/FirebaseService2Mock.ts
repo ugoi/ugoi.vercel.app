@@ -6,8 +6,9 @@ declare global {
 }
 
 class FirebaseService2Mock {
+  // @ts-ignore
   private static settings: any; // Adjust the type as needed
-  private static readonly cloudFunctionUrl: string =
+  private static readonly cloudFunctionUrlCompleteProfile: string =
     import.meta.env.VITE_APP_API_COMPLETE_USER_PROFILE || "";
   private static readonly cloudFunctionUrlAuthToken: string =
     import.meta.env.VITE_APP_GENERATE_COMETCHAT_AUTH_TOKEN || "";
@@ -20,12 +21,14 @@ class FirebaseService2Mock {
   static async getAuthToken(): Promise<string> {
     // Simulate fetching an auth token
     console.log("Mock: Fetching CometChat auth token");
+    console.log("Calling cloud function:", FirebaseService2Mock.cloudFunctionUrlAuthToken);
     return Promise.resolve("r4w7qefgkvux5viuodokkjv8whh2");
   }
 
   public static async completeUserProfile(): Promise<string> {
     // Simulate completing user profile
     console.log("Mock: Completing user profile");
+    console.log("Calling cloud function:", FirebaseService2Mock.cloudFunctionUrlCompleteProfile);
     return Promise.resolve("UserProfileCompleted");
   }
 

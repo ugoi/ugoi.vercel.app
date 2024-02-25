@@ -18,7 +18,6 @@ import {
 import { FirebaseService2 } from "../services/FirebaseService2";
 import { CometChatUIKit } from "@cometchat/chat-uikit-react";
 import { UIKitSettings } from "./cometchat-config";
-import { set } from "firebase/database";
 
 interface AuthContextType {
   authToken: string | null;

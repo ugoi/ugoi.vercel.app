@@ -81,6 +81,7 @@ describe("findCurrentSectionIndex", () => {
     // Mock getBoundingClientRect to simulate sections out of the viewport
     global.document.getElementById = vi
       .fn()
+      // @ts-ignore
       .mockImplementation((id: string) => ({
         getBoundingClientRect: () => ({
           top: 900, // Beyond the viewport
@@ -98,6 +99,7 @@ describe("findCurrentSectionIndex", () => {
     // Mock getBoundingClientRect to simulate sections out of the viewport
     global.document.getElementById = vi
       .fn()
+      // @ts-ignore
       .mockImplementation((id: string) => ({
         getBoundingClientRect: () => ({
           top: 100, // Beyond the viewport
