@@ -27,7 +27,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 h1 {
@@ -70,7 +70,7 @@ button:focus-visible {
 #root {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  height: 100svh; /* Full viewport height */
   width: 100%;
   margin: 0; /* Reset any default margin */
 }
