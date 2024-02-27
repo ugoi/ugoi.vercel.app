@@ -135,7 +135,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     initialize();
-  }, [isAuth]);
+  }, [isAuth, authToken]);
 
   const signUp = async (
     email: string,
