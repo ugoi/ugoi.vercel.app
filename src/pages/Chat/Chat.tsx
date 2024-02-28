@@ -25,10 +25,6 @@ const Chat: React.FC = () => {
   if (isAuth == false) return <Navigate to="/login" />;
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Container for the logout button and the chat; it uses flexbox to position children */}
-      <div style={{ flexGrow: 0 }}>
-        <LogoutComponent />
-      </div>
       <div
         style={{
           flexGrow: 1,

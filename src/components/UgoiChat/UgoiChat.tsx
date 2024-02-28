@@ -13,6 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import { CometChat } from "@cometchat/chat-sdk-javascript";
 import { useAuth } from "../../contexts/AuthContext";
 import "ldrs/dotSpinner";
+import LogoutComponent from "../LogoutComponent/LogoutComponent";
 
 const UgoiChat: React.FC = () => {
   const muiTheme = useTheme(); // Access the theme context
@@ -82,6 +83,7 @@ const UgoiChat: React.FC = () => {
   const usersConfiguration: UsersConfiguration = {
     showSectionHeader: false,
     usersRequestBuilder: usersRequestBuilder,
+    menu: <LogoutComponent />,
   } as UsersConfiguration;
 
   const messagesConfiguration: MessagesConfiguration = {
@@ -89,6 +91,9 @@ const UgoiChat: React.FC = () => {
       hideLiveReaction: true,
       emojiIconURL: "https://img.icons8.com/ios-filled/50/smiling.png",
       AIIconURL: "https://img.icons8.com/ios-glyphs/30/chatbot.png",
+      messageComposerStyle: {
+        textFont: "16px Arial",
+      },
     },
     disableSoundForMessages: true,
     messageHeaderConfiguration: {
