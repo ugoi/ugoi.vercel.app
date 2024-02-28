@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import UgoiChat from "../../components/UgoiChat/UgoiChat";
 import { useAuth } from "../../contexts/AuthContext";
+import { CircularProgress } from "@mui/material";
 
 const Chat: React.FC = () => {
   const { isAuth, isLoaded } = useAuth();
@@ -19,7 +20,7 @@ const Chat: React.FC = () => {
       >
         {/* @ts-ignore */}
         {/* <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner> */}
-        Loading...
+        <CircularProgress />
       </div>
     );
   if (isAuth == false) return <Navigate to="/login" />;

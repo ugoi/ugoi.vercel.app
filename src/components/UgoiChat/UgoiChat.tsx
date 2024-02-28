@@ -8,7 +8,7 @@ import {
   UsersConfiguration,
   WithMessagesStyle,
 } from "@cometchat/chat-uikit-react"; //import the component in your App.js file
-import { useMediaQuery } from "@mui/material";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { CometChat } from "@cometchat/chat-sdk-javascript";
 import { useAuth } from "../../contexts/AuthContext";
@@ -17,7 +17,7 @@ import LogoutComponent from "../LogoutComponent/LogoutComponent";
 const UgoiChat: React.FC = () => {
   const muiTheme = useTheme(); // Access the theme context
   const isMobileView = useMediaQuery(muiTheme.breakpoints.down("sm")); // Check if the current viewport matches a mobile view
-  const { cometChatUser } = useAuth();
+  const { cometChatUser, isLoaded } = useAuth();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const { theme } = useContext(CometChatThemeContext);
 
@@ -53,7 +53,7 @@ const UgoiChat: React.FC = () => {
     }
   }, [prefersDarkMode, theme]);
 
-  if (!cometChatUser)
+  if (!cometChatUser || !isLoaded)
     return (
       <div
         aria-live="polite"
@@ -66,7 +66,7 @@ const UgoiChat: React.FC = () => {
       >
         {/* @ts-ignore */}
         {/* <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner> */}
-        Loading...
+        <CircularProgress />
       </div>
     );
 
