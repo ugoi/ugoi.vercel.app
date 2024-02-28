@@ -15,10 +15,12 @@ const Chat: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           height: "100%",
+          color: "white",
         }}
       >
         {/* @ts-ignore */}
-        <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner>
+        {/* <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner> */}
+        Loading...
       </div>
     );
   if (isAuth == false) return <Navigate to="/login" />;
