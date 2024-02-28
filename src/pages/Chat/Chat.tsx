@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import UgoiChat from "../../components/UgoiChat/UgoiChat";
 import { useAuth } from "../../contexts/AuthContext";
-import "ldrs/dotSpinner";
 
 const Chat: React.FC = () => {
   const { isAuth, isLoaded } = useAuth();

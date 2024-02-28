@@ -12,7 +12,6 @@ import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { CometChat } from "@cometchat/chat-sdk-javascript";
 import { useAuth } from "../../contexts/AuthContext";
-import "ldrs/dotSpinner";
 import LogoutComponent from "../LogoutComponent/LogoutComponent";
 
 const UgoiChat: React.FC = () => {
@@ -66,7 +65,8 @@ const UgoiChat: React.FC = () => {
         }}
       >
         {/* @ts-ignore */}
-        <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner>
+        {/* <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner> */}
+        Loading...
       </div>
     );
 
