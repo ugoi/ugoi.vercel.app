@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+//everything starting and ending with .env will be ignored by git
+*env*
+ugoi-portfolio-test-firebase-adminsdk-1wzyq-21fbb446ae.json

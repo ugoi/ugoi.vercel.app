@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "ugoi-portfolio"
-  }
+    "default": "ugoi-portfolio",
+    "test": "ugoi-portfolio-test",
+    "prod": "ugoi-portfolio"
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -18,7 +18,6 @@
 //   response.send("Hello from Firebase!");
 // });
 
-import * as v1 from "firebase-functions/v1";
 import * as v2 from "firebase-functions/v2";
 import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
@@ -37,23 +36,8 @@ export const helloWorld = v2.https.onRequest(
   (request, response) => {
     logger.info("Hello logs!", { structuredData: true });
     response.json({ message: "Hello from Firebase!" });
-  },
+  }
 );
-
-// Cloud Function triggered on new user creation
-export const onCreateUser = v1.auth.user().onCreate(async (createdUser) => {
-  // const listUsersResult = await admin.auth().listUsers(2);
-  // if (listUsersResult.users.length === 1) {
-  //   await admin
-  //     .auth()
-  //     .setCustomUserClaims(createdUser.uid, { admin: true, member: false });
-  // } else {
-  //   await admin
-  //     .auth()
-  //     .setCustomUserClaims(createdUser.uid, { admin: false, member: true });
-  // }
-  // return;
-});
 
 export const completeUserProfile = v2.https.onRequest(
   { cors: true },
@@ -130,7 +114,7 @@ export const completeUserProfile = v2.https.onRequest(
         message: `Error completing user profile: ${error.message}`,
       });
     }
-  },
+  }
 );
 
 export const generateCometChatAuthToken = v2.https.onRequest(
@@ -166,5 +150,5 @@ export const generateCometChatAuthToken = v2.https.onRequest(
         });
       }
     }
-  },
+  }
 );
