@@ -19,10 +19,10 @@ const Portfolio: React.FC = () => {
       <Grid container spacing={3} mt={3}>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
-            My Best Projects
+            My Portfolio
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            A showcase of my most notable work.
+            Some of the projects I have worked on
           </Typography>
         </Grid>
         {projects.map((project, index) => (
