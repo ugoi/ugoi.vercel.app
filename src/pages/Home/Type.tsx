@@ -13,6 +13,8 @@ const Type: React.FC = () => {
         ],
         autoStart: true,
         loop: true,
+        delay: 75,
+        deleteSpeed: 50,
       }}
     />
   );

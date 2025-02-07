@@ -1,114 +1,118 @@
 import React from "react";
-import { Grid, Typography, Box, Avatar, IconButton } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Box,
+  Card,
+  CardContent,
+  IconButton,
+} from "@mui/material";
 import profilePicture from "../../assets/profileBeach.jpg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const Home2: React.FC = () => {
   return (
-    <Box>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item md={8} xs={12}>
-          <Typography
-            gutterBottom
+    <Box sx={{ py: 8 }}>
+      <Card
+        elevation={6}
+        sx={{
+          borderRadius: 4,
+          overflow: "hidden",
+          background: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(10px)",
+          color: "#fff",
+        }}
+      >
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            md={6}
             sx={{
-              typography: { xs: "h4", md: "h3" },
+              p: 4,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
-            Let me introduce myself
-          </Typography>
-
-          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
-            Hello there! I'm a student from 42 Heilbronn with a flair for
-            bringing ideas into the digital world. For me, it all starts with
-            understanding your vision. By gathering your requirements, I ensure
-            that each project is a custom-fit for its intended users.
-          </Typography>
-
-          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
-            Crafting intuitive designs comes next, where your concept begins to
-            take shape in visual and interactive prototypes. This allows us to
-            iterate and perfect the project's design early in the process.
-          </Typography>
-
-          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
-            When it comes to bringing these designs to life, it's a symphony of
-            technology. Mobile apps and websites are just the start. Underneath
-            the surface, a robust database is key—it's like the foundation of a
-            building that keeps the data organized and accessible.
-          </Typography>
-          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
-            But that's not all. A seamless front-end for users, a reliable
-            back-end for data processing, APIs for communication between
-            different software parts, and thorough testing to ensure everything
-            works as it should, all come together to create a harmonious and
-            efficient app experience.
-          </Typography>
-          <Typography variant="h6" sx={{ textAlign: "left" }} paragraph>
-            My approach is to meticulously integrate these technologies,
-            ensuring each piece works in concert to serve the final product.
-            Let's connect and weave your vision into a digital reality that's as
-            functional as it is striking!
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          md={4}
-          xs={12}
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <Avatar
-            src={profilePicture}
-            alt="Your Name"
-            style={{
-              width: "240px",
-              height: "auto",
-              marginBottom: "1em",
-              borderRadius: 6, // Make the avatar square
+            <CardContent>
+              <Typography variant="h3" gutterBottom sx={{ fontWeight: 700 }}>
+                Let me introduce myself
+              </Typography>
+              <Typography variant="h6" paragraph>
+                Hello there! I'm a student from 42 Heilbronn with a flair for
+                bringing ideas into the digital world. I immerse myself in
+                understanding your vision to create tailor-fit digital
+                experiences.
+              </Typography>
+              <Typography variant="h6" paragraph>
+                From crafting interactive prototypes to developing robust APIs
+                and seamless front-end designs, I blend creativity with
+                technology to build award-worthy projects.
+              </Typography>
+              <Typography variant="h6" paragraph>
+                Let's connect and transform your ideas into compelling digital
+                realities!
+              </Typography>
+            </CardContent>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              p: 4,
+              background: "linear-gradient(135deg, #1f1c2c, #928dab)",
             }}
-          />
+          >
+            <Box
+              component="img"
+              src={profilePicture}
+              alt="Stefan Dukic"
+              sx={{
+                width: { xs: 180, md: 220 },
+                height: "auto",
+                borderRadius: 2,
+                boxShadow: 6,
+                objectFit: "contain",
+              }}
+            />
+          </Grid>
         </Grid>
-      </Grid>
+      </Card>
       <Box
-        my={12}
+        my={6}
         display="flex"
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
         data-testid="connect-section"
       >
-        <Box>
-          <Typography
-            sx={{ typography: { xs: "h4", md: "h3" } }}
-            color="silver"
-          >
-            Connect
-          </Typography>
-        </Box>
-
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          gap={2}
-          mt={0}
-        >
+        <Typography variant="h4" sx={{ color: "#ffd700", mb: 3 }}>
+          Connect
+        </Typography>
+        <Box display="flex" justifyContent="center" alignItems="center" gap={2}>
           <IconButton
             href="https://www.linkedin.com/in/stefan-dukic-68682b20b/"
             target="_blank"
             rel="noreferrer"
             color="primary"
             data-testid="linkedin-button"
+            sx={{ color: "#fff", border: "1px solid #fff" }}
           >
             <LinkedInIcon fontSize="large" />
           </IconButton>
-
           <IconButton
             href="https://github.com/ugoi"
             target="_blank"
             rel="noreferrer"
             color="primary"
             data-testid="github-button"
+            sx={{ color: "#fff", border: "1px solid #fff" }}
           >
             <GitHubIcon fontSize="large" />
           </IconButton>

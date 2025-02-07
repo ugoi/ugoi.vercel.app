@@ -1,50 +1,37 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom"; // Import Link
-import { Slide, useScrollTrigger } from "@mui/material";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Container,
+  Menu,
+  MenuItem,
+  Box,
+} from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import { Link as RouterLink } from "react-router-dom";
+import { styled } from "@mui/system";
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-  children: React.ReactElement;
-}
-
-function HideOnScroll(props: Props) {
-  const { children } = props;
-  const trigger = useScrollTrigger();
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
+interface Route {
+  name: string;
+  path: string;
+  isLogo?: boolean;
 }
 
 interface ResponsiveAppBarProps {
-  routes: {
-    name: string;
-    path: string;
-    component?: string;
-    isLogo?: boolean;
-  }[];
+  routes: Route[];
 }
 
-function ResponsiveAppBar({ routes, ...props }: ResponsiveAppBarProps) {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+const StyledAppBar = styled(AppBar)(() => ({
+  background: "rgba(0, 0, 0, 0.6)", // Semi-transparent dark background for a modern glassmorphism effect
+  backdropFilter: "blur(10px)",
+  boxShadow: "none",
+}));
+
+const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -54,129 +41,107 @@ function ResponsiveAppBar({ routes, ...props }: ResponsiveAppBarProps) {
     setAnchorElNav(null);
   };
 
-  const logoRoute = routes.find((route) => route.isLogo);
-  const rootPath = logoRoute ? logoRoute.path : "/"; // defaulting to '/' if no logo route is found
-  const testIdLogo = logoRoute
-    ? `${logoRoute.name.toLowerCase()}-button`
-    : "home-button"; // Generating the testId from the logoRoute
-
   return (
-    <div data-testid="responsive-app-bar" {...props} >
-      <HideOnScroll>
-        <AppBar>
-          <Container maxWidth="xl">
-            <Toolbar disableGutters>
+    <StyledAppBar position="sticky" data-testid="responsive-app-bar">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* Logo / Home Button for Desktop */}
+          {routes.map((route) =>
+            route.isLogo ? (
               <Typography
-                data-testid={testIdLogo}
+                key={route.name}
                 variant="h6"
                 noWrap
-                component={Link} // Use Link component
-                to={rootPath}
+                component={RouterLink}
+                to={route.path}
                 sx={{
-                  flexGrow: 1,
                   mr: 2,
                   display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
                   fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
+                  color: "#ffd700",
                   textDecoration: "none",
                 }}
+                data-testid="home-button"
               >
-                Sd.
+                {route.name}
               </Typography>
+            ) : null
+          )}
 
-              <Typography
-                data-testid={`${testIdLogo}-xs`}
-                variant="h5"
-                noWrap
-                component={Link} // Use Link component
-                to={rootPath}
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                Sd.
-              </Typography>
-              <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-                {routes
-                  .filter((route) => !route.isLogo)
-                  .map((route) => (
-                    <Button
-                      data-testid={`${route.name.toLowerCase()}-button`}
-                      key={route.path}
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                      component={Link}
-                      to={route.path}
-                    >
-                      {route.name}
-                    </Button>
-                  ))}
-              </Box>
-
-              <Box
-                sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}
-                data-testid="menu-box-xs"
-              >
-                <IconButton
-                  data-testid="icon-button-xs"
-                  size="large"
-                  aria-label="app bar drop down"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
+          {/* Mobile Menu Icon */}
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {routes.map((route) => (
+                <MenuItem
+                  key={route.name}
+                  onClick={handleCloseNavMenu}
+                  component={RouterLink}
+                  to={route.path}
+                  data-testid={`${route.name.toLowerCase()}-button`}
                 >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  data-testid="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
+                  <Typography textAlign="center" sx={{ color: "#000" }}>
+                    {route.name}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+          {/* Desktop Buttons */}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {routes.map((route) =>
+              !route.isLogo ? (
+                <Button
+                  key={route.name}
+                  component={RouterLink}
+                  to={route.path}
+                  onClick={handleCloseNavMenu}
                   sx={{
-                    display: { xs: "block", md: "none" },
+                    my: 2,
+                    color: "#fff",
+                    display: "block",
+                    mx: 2,
+                    fontWeight: 500,
+                    textTransform: "none",
                   }}
+                  data-testid={`${route.name.toLowerCase()}-button`}
                 >
-                  {routes
-                    .filter((route) => !route.isLogo)
-                    .map((route) => (
-                      <MenuItem
-                        data-testid={`${route.name.toLowerCase()}-button-xs`}
-                        key={route.path}
-                        onClick={handleCloseNavMenu}
-                        component={Link}
-                        to={route.path}
-                      >
-                        <Typography textAlign="center">{route.name}</Typography>
-                      </MenuItem>
-                    ))}
-                </Menu>
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </HideOnScroll>
-      <Toolbar />
-    </div>
+                  {route.name}
+                </Button>
+              ) : null
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
+    </StyledAppBar>
   );
-}
+};
+
 export default ResponsiveAppBar;

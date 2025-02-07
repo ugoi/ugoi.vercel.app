@@ -1,4 +1,5 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import { styled, keyframes } from "@mui/system";
 import { scrollToNextSection } from "./utils";
 
 // src/data/data.js or a similar location
@@ -41,12 +42,52 @@ const sectionsData = [
   },
 ];
 
+// Utility function to reference background assets (adjust URL as needed)
 const url = (name: string, wrap = false) =>
   `${
     wrap ? "url(" : ""
   }https://awv3node-homepage.surge.sh/build/assets/${name}.svg${
     wrap ? ")" : ""
   }`;
+
+// Keyframes for fadeIn animation
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+// Main container with a background image and fadeIn effect
+const AboutContainer = styled(Box)(({ theme }) => ({
+  width: "100%",
+  minHeight: "100vh",
+  backgroundColor: "#1f1c2c",
+  backgroundImage: url("stars", true),
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  padding: theme.spacing(4),
+  animation: `${fadeIn} 1s ease-out`,
+}));
+
+// A styled container for each section using a glassmorphic look
+const SectionContainer = styled(Container)(({ theme }) => ({
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: theme.spacing(6),
+  background: "rgba(255, 255, 255, 0.1)",
+  backdropFilter: "blur(8px)",
+  marginBottom: theme.spacing(4),
+  borderRadius: theme.shape.borderRadius,
+}));
+
+// Gradient styled typography for section titles
+const GradientTypography = styled(Typography)({
+  background: "linear-gradient(45deg, #ffd700, #ff8c00)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+});
 
 const About = () => {
   // Handler for container click, integrates other functions
@@ -55,44 +96,28 @@ const About = () => {
     scrollToNextSection(sectionIds);
   };
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        textAlign: "left",
-        backgroundImage: url("stars", true),
-      }}
-      data-testid="about-page"
-      onClick={handleContainerClick}
-    >
-      <Container>
-        {sectionsData.map((section, index) => (
-          <Container
-            key={index}
-            id={`section-${index}`}
-            style={{ height: "100vh" }}
-          >
-            <Typography
-              sx={{
-                typography: { xs: "h3", md: "h2" },
-              }}
-              component="h2"
+    <AboutContainer data-testid="about-page" onClick={handleContainerClick}>
+      <Container maxWidth="lg">
+        {sectionsData.map((section) => (
+          <SectionContainer key={section.id} id={section.id}>
+            <GradientTypography
+              variant="h3"
               gutterBottom
+              sx={{ fontWeight: 700, mb: 2 }}
             >
               {section.title}
-            </Typography>
+            </GradientTypography>
             <Typography
-              sx={{
-                typography: { xs: "h6", md: "h5" },
-              }}
+              variant="h6"
+              sx={{ color: "#fff", lineHeight: 1.6 }}
               paragraph
             >
               {section.content}
             </Typography>
-          </Container>
+          </SectionContainer>
         ))}
       </Container>
-    </div>
+    </AboutContainer>
   );
 };
 

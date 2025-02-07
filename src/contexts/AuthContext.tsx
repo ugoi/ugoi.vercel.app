@@ -115,7 +115,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (!user) {
           const authToken = await FirebaseService2.getAuthToken();
           // Login user if no user is logged in
-          const loggedInUser = await CometChatUIKit.loginWithAuthToken(authToken);
+          const loggedInUser = await CometChatUIKit.loginWithAuthToken(
+            authToken
+          );
 
           console.log("Login Successful:", { user: loggedInUser });
           setCometChatUser(loggedInUser);
