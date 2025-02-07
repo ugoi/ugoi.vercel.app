@@ -4,6 +4,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useRef,
   ReactNode,
 } from "react";
 import { auth, provider } from "../firebase-config";
@@ -55,10 +56,12 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false); // Initially set to false
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [cometChatUser, setCometChatUser] = useState<CometChat.User | null>(
     null
   );
+
+  const cometChatInitializedRef = useRef<boolean>(false);
 
   useEffect(() => {
     const token = cookies.get("auth-token");
@@ -69,14 +72,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsAuth(true);
         // Optionally update authToken here if needed
       } else {
-        CometChat.logout().then(
-          () => {
-            console.log("Logout completed successfully");
-          },
-          (error) => {
-            console.log("Logout failed with exception:", { error });
-          }
-        );
+        if (cometChatInitializedRef.current) {
+          CometChat.logout().then(
+            () => {
+              console.log("Logout completed successfully");
+            },
+            (error) => {
+              console.log("Logout failed with exception:", { error });
+            }
+          );
+        } else {
+          console.log("CometChat not initialized, skipping logout");
+        }
         setIsAuth(false);
         setAuthToken(null); // Clear authToken if necessary
         cookies.remove("auth-token");
@@ -109,6 +116,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         console.log("Initializing CometChat UIKit");
         await CometChatUIKit.init(UIKitSettings);
         console.log("Initialization completed successfully");
+        cometChatInitializedRef.current = true;
 
         // Check for logged in user
         const user = await CometChatUIKit.getLoggedinUser();
