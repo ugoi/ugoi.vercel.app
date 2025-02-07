@@ -114,6 +114,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         // Attempt to initialize CometChat UIKit
         console.log("Initializing CometChat UIKit");
+
+        // Add a delay to ensure the UIKit is initialized
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         await CometChatUIKit.init(UIKitSettings);
         console.log("Initialization completed successfully");
         cometChatInitializedRef.current = true;
