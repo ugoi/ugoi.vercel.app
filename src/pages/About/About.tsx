@@ -58,7 +58,6 @@ const fadeIn = keyframes`
 
 // Main container with a background image and fadeIn effect
 const AboutContainer = styled(Box)(({ theme }) => ({
-  width: "100%",
   minHeight: "100vh",
   backgroundColor: "#1f1c2c",
   backgroundImage: url("stars", true),
