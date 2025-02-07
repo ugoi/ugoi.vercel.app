@@ -1,5 +1,10 @@
-import React from "react";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import ResponsiveAppBar from "./components/ResponsiveAppBar/ResponsiveAppBar";
 import routes from "./routesConfig";
 import Home from "./pages/Home/Home";
@@ -9,17 +14,29 @@ import Chat from "./pages/Chat/Chat";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./pages/Login/Login";
 
-// Defione navbar component with outlet
+// Add this new component
+const ScrollToTop: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
+
+// Modify the Root component to include ScrollToTop
 const Root: React.FC = () => {
   return (
     <>
+      <ScrollToTop />
       <ResponsiveAppBar data-testid="responsive-app-bar" routes={routes} />
       <div
         id="detail"
         style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
       >
         <AuthProvider>
-        <Outlet />
+          <Outlet />
         </AuthProvider>
       </div>
     </>
