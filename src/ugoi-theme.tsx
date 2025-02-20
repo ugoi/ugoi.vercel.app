@@ -14,7 +14,7 @@ const UgoiThemeProvider: React.FC<UgoiThemeProviderProps> = ({ children }) => {
     () =>
       createTheme({
         palette: {
-          mode: prefersDarkMode ? "dark" : "light",
+          mode: "dark",
         },
       }),
     [prefersDarkMode]
