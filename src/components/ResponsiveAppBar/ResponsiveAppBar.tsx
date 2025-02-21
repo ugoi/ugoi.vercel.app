@@ -77,6 +77,14 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{
+                "&:focus": {
+                  outline: "none",
+                },
+                "&.Mui-focusVisible": {
+                  outline: "2px solid #ffd700",
+                },
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -96,6 +104,10 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
+                "& .MuiPaper-root": {
+                  backgroundColor: "rgba(0, 0, 0, 0.9)",
+                  backdropFilter: "blur(10px)",
+                },
               }}
             >
               {routes.map((route) => (
@@ -106,7 +118,7 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
                   to={route.path}
                   data-testid={`${route.name.toLowerCase()}-button`}
                 >
-                  <Typography textAlign="center" sx={{ color: "#000" }}>
+                  <Typography textAlign="center" sx={{ color: "#fff" }}>
                     {route.name}
                   </Typography>
                 </MenuItem>

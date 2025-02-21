@@ -73,8 +73,9 @@ const SectionContainer = styled(Container)(({ theme }) => ({
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   padding: theme.spacing(6),
+  paddingTop: theme.spacing(10),
   background: "rgba(255, 255, 255, 0.1)",
   backdropFilter: "blur(8px)",
   marginBottom: theme.spacing(4),
@@ -82,11 +83,20 @@ const SectionContainer = styled(Container)(({ theme }) => ({
 }));
 
 // Gradient styled typography for section titles
-const GradientTypography = styled(Typography)({
+const GradientTypography = styled(Typography)(({ theme }) => ({
   background: "linear-gradient(45deg, #ffd700, #ff8c00)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
-});
+  fontSize: "2rem", // Default size
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1.5rem", // Smaller size for mobile devices
+  },
+  wordBreak: "break-word", // Allows words to break if needed
+  hyphens: "auto", // Enables hyphenation
+  "@media (max-width: 350px)": {
+    fontSize: "1.2rem", // Even smaller for very narrow screens
+  },
+}));
 
 const About = () => {
   // Handler for container click, integrates other functions
@@ -102,13 +112,24 @@ const About = () => {
             <GradientTypography
               variant="h3"
               gutterBottom
-              sx={{ fontWeight: 700, mb: 2 }}
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
             >
               {section.title}
             </GradientTypography>
             <Typography
               variant="h6"
-              sx={{ color: "#fff", lineHeight: 1.6 }}
+              sx={{
+                color: "#fff",
+                lineHeight: 1.6,
+                fontSize: {
+                  xs: "1rem", // Small screens (mobile)
+                  sm: "1.1rem", // Medium screens (tablets)
+                  md: "1.25rem", // Default h6 size for larger screens
+                },
+              }}
               paragraph
             >
               {section.content}

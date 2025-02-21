@@ -18,40 +18,33 @@ const UgoiChat: React.FC = () => {
   const muiTheme = useTheme(); // Access the theme context
   const isMobileView = useMediaQuery(muiTheme.breakpoints.down("sm")); // Check if the current viewport matches a mobile view
   const { cometChatUser, isLoaded } = useAuth();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const { theme } = useContext(CometChatThemeContext);
 
   const themeContext = useMemo(() => {
-    if (prefersDarkMode) {
-      return {
-        theme: new CometChatTheme({
-          palette: new CometChatPalette({
-            mode: "dark",
-            primary: {
-              light: "#D422C2",
-              dark: "#D422C2",
-            },
-            accent: {
-              light: "#07E676",
-              dark: "#B6F0D3",
-            },
-            accent50: {
-              light: "#39f",
-              dark: "#141414",
-            },
-            accent900: {
-              light: "white",
-              dark: "black",
-            },
-          }),
+    return {
+      theme: new CometChatTheme({
+        palette: new CometChatPalette({
+          mode: "dark",
+          primary: {
+            light: "#D422C2",
+            dark: "#D422C2",
+          },
+          accent: {
+            light: "#07E676",
+            dark: "#B6F0D3",
+          },
+          accent50: {
+            light: "#39f",
+            dark: "#141414",
+          },
+          accent900: {
+            light: "white",
+            dark: "black",
+          },
         }),
-      };
-    } else {
-      return {
-        theme,
-      };
-    }
-  }, [prefersDarkMode, theme]);
+      }),
+    };
+  }, []);
 
   if (!cometChatUser || !isLoaded)
     return (
