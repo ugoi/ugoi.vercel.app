@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import {
   CometChatPalette,
   CometChatTheme,
@@ -18,7 +18,6 @@ const UgoiChat: React.FC = () => {
   const muiTheme = useTheme(); // Access the theme context
   const isMobileView = useMediaQuery(muiTheme.breakpoints.down("sm")); // Check if the current viewport matches a mobile view
   const { cometChatUser, isLoaded } = useAuth();
-  const { theme } = useContext(CometChatThemeContext);
 
   const themeContext = useMemo(() => {
     return {
