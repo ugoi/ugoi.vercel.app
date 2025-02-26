@@ -45,31 +45,14 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
     <StyledAppBar position="sticky" data-testid="responsive-app-bar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo / Home Button for Desktop */}
-          {routes.map((route) =>
-            route.isLogo ? (
-              <Typography
-                key={route.name}
-                variant="h6"
-                noWrap
-                component={RouterLink}
-                to={route.path}
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontWeight: 700,
-                  color: "#ffd700",
-                  textDecoration: "none",
-                }}
-                data-testid="home-button"
-              >
-                {route.name}
-              </Typography>
-            ) : null
-          )}
-
           {/* Mobile Menu Icon */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              justifyContent: "flex-end",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="menu"
@@ -92,21 +75,40 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "right",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
                 "& .MuiPaper-root": {
-                  backgroundColor: "rgba(0, 0, 0, 0.9)",
+                  backgroundColor: "rgba(0, 0, 0, 0.95)",
                   backdropFilter: "blur(10px)",
+                  width: "100vw",
+                  height: "100vh",
+                  top: "0 !important",
+                  left: "0 !important",
+                  position: "fixed",
+                  maxWidth: "none",
+                  maxHeight: "none",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                },
+                "& .MuiList-root": {
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "1rem",
+                  padding: "2rem",
                 },
               }}
             >
@@ -117,6 +119,12 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
                   component={RouterLink}
                   to={route.path}
                   data-testid={`${route.name.toLowerCase()}-button`}
+                  sx={{
+                    width: "auto",
+                    justifyContent: "center",
+                    fontSize: "1.5rem",
+                    padding: "1rem 2rem",
+                  }}
                 >
                   <Typography textAlign="center" sx={{ color: "#fff" }}>
                     {route.name}
@@ -126,10 +134,17 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
             </Menu>
           </Box>
 
-          {/* Desktop Buttons */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          {/* Desktop Navigation - All items including logo aligned to the right */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
             {routes.map((route) =>
-              !route.isLogo ? (
+              route.isLogo ? (
                 <Button
                   key={route.name}
                   component={RouterLink}
@@ -138,16 +153,40 @@ const ResponsiveAppBar: React.FC<ResponsiveAppBarProps> = ({ routes }) => {
                   sx={{
                     my: 2,
                     color: "#fff",
-                    display: "block",
+                    display: "flex",
                     mx: 2,
                     fontWeight: 500,
                     textTransform: "none",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minWidth: "fit-content",
+                  }}
+                  data-testid="home-button"
+                >
+                  {route.name}
+                </Button>
+              ) : (
+                <Button
+                  key={route.name}
+                  component={RouterLink}
+                  to={route.path}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "#fff",
+                    display: "flex",
+                    mx: 2,
+                    fontWeight: 500,
+                    textTransform: "none",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minWidth: "fit-content",
                   }}
                   data-testid={`${route.name.toLowerCase()}-button`}
                 >
                   {route.name}
                 </Button>
-              ) : null
+              )
             )}
           </Box>
         </Toolbar>

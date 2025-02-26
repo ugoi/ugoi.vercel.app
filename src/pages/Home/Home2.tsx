@@ -92,29 +92,68 @@ const Home2: React.FC = () => {
         justifyContent="center"
         data-testid="connect-section"
       >
-        <Typography variant="h4" sx={{ color: "#ffd700", mb: 3 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            color: "#fff",
+            mb: 4,
+          }}
+        >
           Connect
         </Typography>
-        <Box display="flex" justifyContent="center" alignItems="center" gap={2}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          gap={4}
+          sx={{
+            "& .MuiIconButton-root": {
+              transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+              background: "rgba(255, 255, 255, 0.05)",
+              backdropFilter: "blur(10px)",
+              border: "2px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: "50%",
+              padding: "15px",
+              width: "60px",
+              height: "60px",
+              "&:hover": {
+                transform: "scale(1.1)",
+                background: "rgba(255, 255, 255, 0.1)",
+                border: "2px solid rgba(255, 215, 0, 0.5)",
+                boxShadow: "0 0 20px rgba(255, 215, 0, 0.2)",
+                "& .MuiSvgIcon-root": {
+                  color: "#ffd700",
+                  transform: "scale(1.1)",
+                },
+              },
+              "&:active": {
+                transform: "scale(0.95)",
+              },
+            },
+            "& .MuiSvgIcon-root": {
+              fontSize: "2rem",
+              transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+              color: "rgba(255, 255, 255, 0.9)",
+            },
+          }}
+        >
           <IconButton
             href="https://www.linkedin.com/in/stefan-dukic-68682b20b/"
             target="_blank"
             rel="noreferrer"
-            color="primary"
+            aria-label="LinkedIn"
             data-testid="linkedin-button"
-            sx={{ color: "#fff", border: "1px solid #fff" }}
           >
-            <LinkedInIcon fontSize="large" />
+            <LinkedInIcon />
           </IconButton>
           <IconButton
             href="https://github.com/ugoi"
             target="_blank"
             rel="noreferrer"
-            color="primary"
+            aria-label="GitHub"
             data-testid="github-button"
-            sx={{ color: "#fff", border: "1px solid #fff" }}
           >
-            <GitHubIcon fontSize="large" />
+            <GitHubIcon />
           </IconButton>
         </Box>
       </Box>
