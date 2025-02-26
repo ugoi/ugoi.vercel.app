@@ -88,7 +88,7 @@ const GlassCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledTextField = styled(TextField)(() => ({
   "& .MuiOutlinedInput-root": {
     color: "#fff",
     borderRadius: "12px",
@@ -112,7 +112,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const ActionButton = styled(Button)(({ theme }) => ({
+const ActionButton = styled(Button)(() => ({
   borderRadius: "12px",
   padding: "12px",
   fontWeight: "bold",
@@ -128,7 +128,7 @@ const ActionButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const TextButton = styled(Button)(({ theme }) => ({
+const TextButton = styled(Button)(() => ({
   color: "rgba(255, 255, 255, 0.7)",
   textTransform: "none",
   transition: "all 0.3s ease",
@@ -138,7 +138,7 @@ const TextButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const GoogleButton = styled(Button)(({ theme }) => ({
+const GoogleButton = styled(Button)(() => ({
   borderRadius: "12px",
   padding: "12px",
   fontWeight: "bold",
